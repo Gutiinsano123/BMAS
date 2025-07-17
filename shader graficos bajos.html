@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaders de Minecraft</title>
+    <style>
+        .shader-block {
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            display: inline-block;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .shader-title {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 5px black;
+        }
+        .shader-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        /* Reset y base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Video de fondo a pantalla completa */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Contenedor del contenido encima del video */
+        .content {
+            position: relative;
+            z-index: 10;
+            color: #fff;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        nav {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(40, 40, 40, 0.85);
+            color: white;
+            padding: 1rem 2rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 15;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        nav a {
+            color: #eee;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #a3d8f4;
+        }
+        /* Ejemplo botón */
+        .btn {
+            background-color: #4a6572;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 12px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #6c8490;
+        }
+        * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0; /* Cambia el color de fondo según necesites */
+}
+
+
+
+h1 {
+    font-size: 2.5em;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff; /* Color del botón */
+    color: white;
+}
+ body {
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            text-decoration: none;
+            color: #333;
+            background-color: #e2e2e2;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #363434;
+        }
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .menu {
+            width: 200px; /* Ancho del menú */
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+            padding: 15px;
+            position: fixed;
+            right: 0; /* Posiciona el menú a la derecha */
+            top: 50px; /* Espaciado desde la parte superior */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .contenido {
+            margin-right: 220px; /* Deja espacio para el menú */
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .menu {
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco con 70% de opacidad */
+    border: 1px solid #1a080800; /* Bordes opcionales */
+    padding: 10px;
+    border-radius: 5px; /* Esquinas redondeadas */
+}
+
+.menu h2 {
+    margin: 0 0 10px;
+}
+
+.menu ul {
+    list-style: none; /* Sin viñetas */
+    padding: 0;
+}
+
+.menu li {
+    margin: 5px 0; /* Espaciado entre opciones */
+}
+body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column; /* Colocar elementos en columna */
+            align-items: flex-start; /* Alinear elementos a la izquierda */
+            padding: 20px;
+        }
+        .block {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+            width: 200px; /* Ancho de cada bloque */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>BMAS-BEST MODS AND SHADERS</div>
+        <ul>
+              <li><a href="./inicio.html">Inicio</a></li>
+            <li><a href="./logeate.html">Logeate</a></li>
+            <li><a href="./registrate.html">Registrate</a></li>
+        </ul>
+    </nav>
+    <div class="menu">
+        <h2>Versiones</h2>
+        <ul>
+             <li><a href="./shader graficos bajos.html"> Low</a></li>
+             <li><a href="./shaders graficos medios.html"> Medium</a></li>
+             <li><a href="./shaders graficos altos.html"> High</a></li>
+        </ul>
+    </div>
+
+
+    </div>
+    <div>
+    <video autoplay muted loop playsinline class="video-background" aria-label="Video de fondo de mundo Minecraft con árboles, tierra y cielo azul">
+        <source src="https://cdn.videvo.net/videvo_files/video/free/2019-07/small_watermarked/190627_02_Digital_4k_038_preview.webm" type="video/webm">
+        <source src="./video de fondo shaders.mp4" type="video/mp4">
+    </video>
+
+    <div class="shader-block" onclick="location.href='eclipse lite shaders.html'">
+        <img src="./eclipselite shader.webp" alt="EclipseLite Shaders" class="shader-image">
+        <div class="shader-title">Eclipse Lite Shaders</div>
+    </div>
+
+    <div class="shader-block" onclick="location.href='amethyst shaders.html'">
+        <img src="./amethyst shaders.webp" alt="Amethyst Shaders" class="shader-image">
+        <div class="shader-title">Amethyst Shaders</div>
+    </div>
+
+    <div class="shader-block" onclick="location.href='visual vibrance shaders.html'">
+        <img src="./visual vibrance shaders.webp" alt="Visual Vibrance Shaders" class="shader-image">
+        <div class="shader-title">Visual Vibrance Shaders</div>
+    </div>
+
+    
+
+    
+
+</body>
+</html>
+
+
